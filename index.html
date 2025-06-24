@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WebMester</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- AOS CSS -->
+<link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  .simple-shadow-frame {
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); 
+  transition: box-shadow 0.3s ease;
+}
+
+.simple-shadow-frame:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); 
+}
+
+.simple-shadow-frame img {
+  display: block;
+  width: 100%;        
+  height: auto;
+  border: none;      
+  border-radius: 12px;
+}
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.simple-shadow-frame {
+  width: 300px;
+  text-align: center;
+}
+
+.image-card {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.image-card:hover {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.3);
+}
+
+.image-card img {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.image-caption {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #333;
+}
+.vlogger-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.vlogger-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+}
+
+.vlogger-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: box-shadow 0.3s ease;
+}
+
+.vlogger-item img:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.vlogger-caption {
+  margin-top: 12px;
+  font-style: italic;
+  font-weight: 500;
+  color: #4a4a4a;
+  text-align: center;
+  font-size: 0.95rem;
+}
+.simple-shadow-frame {
+  border-radius: 10px;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.3s ease;
+  display: inline-block;
+  width: 300px;   
+}
+
+.simple-shadow-frame:hover {
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.25);
+}
+
+.simple-shadow-frame > img {
+  border-radius: 10px;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+}
+
+
+.simple-shadow-frame.adaptive-width {
+  width: auto;       
+  padding: 6px 12px; 
+}
+
+.simple-shadow-frame.adaptive-width > img {
+  width: auto;      
+  max-width: 300px;  
+  height: 200px;
+  display: block;
+  border-radius: 10px;
+}
+.content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.simple-shadow-frame {
+  border-radius: 10px;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* sötétebb árnyék */
+  transition: box-shadow 0.3s ease;
+  width: 320px;
+  text-align: center;
+}
+
+.simple-shadow-frame:hover {
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.4); /* hover árnyék */
+}
+
+.image-caption {
+  margin-top: 12px;
+  font-style: italic;
+  font-weight: 500;
+  color: #444;
+}
+.zoom-container {
+  position: relative;
+  display: inline-block;
+}
+
+.zoom-image {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-btn {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.zoom-btn:hover {
+  background: rgba(255, 255, 255, 1);
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+}
+</style>
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans"></body>
+
+  <!-- Hero szekció -->
+ <section class="relative h-screen w-full overflow-hidden">     
+    <video autoplay muted loop playsinline class="absolute top-0 left-0 w-auto min-w-full min-h-full object-cover z-0">
+      <source src="video.mp4" type="video/mp4">
+    </video>
+     <div class="absolute inset-0 bg-black/50 z-10"></div>
+     <div class="absolute top-6 left-6 z-30">
+      <img src="kép.jpg" alt="Szabolcsi Dávid" class="w-16 h-16 rounded-full border-2 border-white shadow-md object-cover">
+     </div>
+<div class="relative z-20 flex flex-col items-center justify-center h-full px-4 md:px-6 text-white text-center space-y-4">
+  <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center md:text-left">Szia, Szabolcsi Dávid vagyok!</h1>
+<div class="flex flex-col sm:flex-row sm:gap-4 items-center justify-center text-white text-2xl text-center">
+    <a href="#webfejlesztes" class="underline hover:text-red-500 transition-colors duration-300" id="scrollToWeb">Webfejlesztő</a>
+    <span class="hidden sm:inline">|</span>
+    <a href="#vlogger" class="underline hover:text-red-500 transition-colors duration-300">Vlogger</a>
+    <span class="hidden sm:inline">|</span>
+    <a href="#tartalomgyarto" class="underline hover:text-red-500 transition-colors duration-300">Tartalomgyártó</a>
+  </div>
+ <div class="mt-10 flex justify-center px-4"></div>
+  <a href="#projektek" class="px-6 py-3 bg-blue-600 hover:bg-blue-700 transition-colors duration-300 text-white text-lg md:text-xl rounded-full shadow-md w-full max-w-xs text-center">
+  Nézd meg a munkáim
+  </a>
+</div>
+      <div style="text-align: center; margin: 40px 0;">
+         <a href="#vlogvideoim" style="
+    display: inline-block;
+    background-color: #007acc;
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+  " onmouseover="this.style.backgroundColor='#005f99'" onmouseout="this.style.backgroundColor='#007acc'">
+         </a>
+      </div>
+      <section id="munkak" style="margin-top: 60px; padding: 40px 20px"></section>
+      </section>
+
+  <!-- About szekció -->
+   <section id="rolam" style="max-width: 700px; margin: 60px auto; padding: 30px; border: 2px solid #ccc; border-radius: 10px; text-align: center; background-color: #fdfdfd;">
+     <h2 data-aos="fade-up"style="font-size: 2.5rem; margin-bottom: 20px;">Rólam</h2>
+      <p data-aos="fade-up" style="font-style: italic; font-weight: 600; font-size: 1.2rem;">Szia! Szabolcsi Dávid vagyok, szenvedélyes weboldal készítő és kreatív tartalomgyártó.
+Webfejlesztőként olyan modern, letisztult és látványos weboldalakat hozok létre, amelyek nemcsak jól néznek ki, hanem működnek is.
+Amikor épp nem kódsorok között vagyok, vlogokat készítek: videókban mesélek a technológiáról, a mindennapjaimról és az inspirációimról.
+A célom, hogy értéket adjak – akár egy egyedi weboldalon, akár egy őszinte videón keresztül.
+    </p>
+  </section>
+  <section id="webfejlesztes" data-aos="fade-up" style="max-width: 800px; margin: 60px auto; padding: 30px; border: 2px solid #ddd; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+   <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Webfejlesztőként ezt kínálom</h2>
+<p style="font-style: italic; font-weight: 600; font-size: 1.2rem;">
+  <strong><em>Modern, reszponzív weboldalakat fejlesztek, egyedi igényekre szabva.</em></strong><br>
+  <strong><em>Gyors, felhasználóbarát és esztétikus megoldások.</em></strong>
+</p>
+
+<div style="height: 30px;"></div>
+
+<div class="content-wrapper">
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <div class="zoom-container">
+       <img src="automatikus-kodgeneralas-agilexpert.jpg" alt="Kódolás" style="width: 100%; max-width: 360px; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 10px;" class="zoomable" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+    <p class="image-caption">Egyedi weboldal design</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <img src="benkadesign3.jpg" alt="Design" style="border-radius: 10px; width: 300px; height: 200px; object-fit: cover;" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="image-caption">Mobilbarát megjelenés</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <img src="reszponziv-weboldal-blog-FB.jpg" alt="Reszponzív dizájn" style="border-radius: 10px; width: 300px; height: 200px; object-fit: cover;" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="image-caption">Gyors betöltési idő</p>
+  </div>
+</div>
+</section>
+<section id="vlogger"data-aos="fade-up"style="max-width: 800px; margin: 60px auto; padding: 30px; border: 2px solid #ccc; border-radius: 10px; background-color: #fefefe; text-align: center;">
+  <div class="max-w-5xl mx-auto px-4">
+
+<h2 style="font-size: 2.5rem; margin-bottom: 20px;">Vlogger élet</h2>
+<p style="font-style: italic; font-weight: 600; font-size: 1.2rem;">
+  <strong><em>Vlogokat készítek a mindennapjaimról, eseményekről és kreatív projektekről.</em></strong><br>
+  <strong><em>Szórakoztató, valóságalapú tartalom, közvetlen stílusban.</em></strong>
+</p>
+
+<div style="height: 30px;"></div>
+
+<div class="content-wrapper">
+  <div class="simple-shadow-frame">
+    <img src="influencer-vlogger.jpg" alt="Vlog kép 1" class="zoomable" onclick="openLightbox(this.src)">
+    <p class="image-caption">Kamera mögött: egy új vlog napja indul</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <img src="vlog-successufully.webp" alt="Instagram kép 2" class="zoomable" onclick="openLightbox(this.src)">
+    <p class="image-caption">„Ez itt a valóság – egy kis kulisszatitok, nektek első kézből.”</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <img src="9+Vlogging+Tips+From+the+Best+Fashion+Vloggers+on+YouTube.jpg" alt="Tartalomgyártás" class="zoomable" onclick="openLightbox(this.src)">
+    <p class="image-caption">Utómunka: vágás, szerkesztés, feltöltés</p>
+  </div>
+</div>
+</section>
+<section id="tartalomgyarto"data-aos="fade-up"style="max-width: 800px; margin: 60px auto; padding: 30px; border: 2px solid #ccc; border-radius: 10px; background-color: #f9f9f9; text-align: center;">
+  
+ <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Tartalomgyártás</h2>
+
+<p style="font-style: italic; font-weight: 600; font-size: 1.1rem;">
+  <strong><em>Kreatív tartalmakat gyártok videók, vlogok és közösségi média anyagok formájában.</em></strong><br>
+  <strong><em>Célom az értékes és szórakoztató vizuális élmény átadása.</em></strong>
+</p>
+
+<div style="height: 30px;"></div>
+
+<div class="content-wrapper">
+  
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <img src="rf16mm-f2.jpg" alt="Vlog kép" style="border-radius: 10px; width: 300px; height: 200px;" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="image-caption">Vlog videózás</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <img src="9instapost5.jpg" alt="Instagram kép" style="border-radius: 10px; width: 300px; height: 200px;" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="image-caption">Instagram tartalom</p>
+  </div>
+
+  <div class="simple-shadow-frame">
+    <div class="image-card">
+      <img src="klikkmarketing-szolgaltatasok-tartalomgyartas.jpg" alt="Tartalomgyártás" style="border-radius: 10px; width: 300px; height: 200px;" class="zoomable" onclick="openLightbox(this.src)">
+    </div>
+    <p class="image-caption">Marketing tartalom</p>
+  </div>
+</div>
+</section>
+
+  <!-- Projects szekció -->
+  <section id="projektek" class="py-12">
+    <h2 class="text-3xl font-bold text-center mb-6">🎬Projektjeim</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Projekt 1 -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;"></div>
+        <section id="dave-show">Dave Show</section>
+      <h1 style="font-size: 3rem; font-weight: bold;margin-bottom: 20px;">🎥 Dave Show</h1>
+        <div style="display: flex; justify-content: center; margin: 40px 0;">
+  <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/FYLqTcbxLQc?si=Ub9biAA15YrymiAz" 
+          title="Dave Show" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+         <p><strong>Itt indul minden. Első kamera, első bénázások, első próbálkozások. Ebben a részben belenézhetsz, honnan indult a Dave Show, milyen volt az első nap a kamerával, és hogyan született meg az ötlet, hogy megmutassuk az életünket</strong> – <strong>őszintén, vágás nélkül. Ez még csak a bemelegítés... de innen indul a sztori!</strong></p></div>
+       <section style="padding: 60px 20px; background-color: #fafafa; text-align: center;"></section>
+      
+        <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+          <section id="zsivanyok-podcast">Zsiványok Podcast</section>
+         <h1 style="font-size: 3rem; font-weight: bold;margin-bottom: 20px;">🎥 Zsiványok Podcast</h1>
+        <div style="display: flex; justify-content: center; margin: 40px 0;">
+  <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/0zfSEuVwN-M?si=5tpriyFDVFIBVgpD" 
+          title="Zsiványok Podcast" frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      <strong>3. évadban még több szókimondó, laza és őszinte beszélgetés. Zsivány vendégek, friss témák, provokatív sztorik!</strong>
+    </p>
+      
+    </div>
+  </div>
+</section>
+      <section style="padding: 60px 20px; background-color: #fafafa; text-align: center;">
+  <div style="
+    border: 3px solid #333; border-radius: 12px; padding: 30px; max-width: 900px; margin: 0 auto;box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+    <section id="vlog">Vlog</section>
+    <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 20px;">📹 Vlog</h2>
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 25px;">
+      <iframe 
+        src="https://www.youtube.com/embed/ZpxtEZNLexw"
+        title="Vlog"
+        frameborder="0"
+        allowfullscreen
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+      </iframe>
+    </div>>
+    <p style="font-style: italic; font-size: 1.1rem;"></p>
+      <strong>Egy különleges betekintés a vlog forgatások kulisszái mögé. Technikák, nevetések és valódi pillanatok!</strong>
+      <!-- További projektek -->
+    </div>
+      </section>
+
+  <!-- Kapcsolat szekció -->
+  <section id="contact" class="p-10 bg-white text-center">
+    <h2 class="text-3xl font-bold mb-4">Kapcsolat</h2>
+  <div class="flex justify-center mb-6">
+    <a href="https://www.youtube.com/@flukydave6702" target="_blank" class="flex items-center gap-2 hover:scale-110 transition-transform" aria-label="YouTube">
+      <svg xmlns="http://www.w3.org/2000/svg" width="80" height="24" viewBox="0 0 100 24">
+        <path fill="#FF0000" d="M97.3 6.2c-.3-1.6-1.7-2.9-3.3-3.2C90.6 2.4 50 2.4 50 2.4s-40.6 0-44 0c-1.6.3-3 1.6-3.3 3.2C2 9.7 2 12 2 12s0 2.3.7 5.8c.3 1.6 1.7 2.9 3.3 3.2 3.4.6 44 .6 44 .6s40.6 0 44 0c1.6-.3 3-1.6 3.3-3.2.7-3.5.7-5.8.7-5.8s0-2.3-.7-5.8z"/>
+        <path fill="#fff" d="M40 15.5v-7l6 3.5-6 3.5z"/>
+      </svg>
+      <span class="text-red-600 font-semibold text-lg">YouTube</span>
+     </a>
+      <span style="margin: 0 0.5rem;">/</span>
+      <a href="https://www.instagram.com/dave98__official/" target="_blank" class="flex items-center gap-1 hover:scale-110 transition-transform" aria-label="Instagram">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 448 512" fill="#E1306C">
+        <path d="M224.1 141c-63.6 0-115 51.4-115 115s51.4 115 115 115 115-51.4 115-115-51.3-115-115-115zm0 190.2c-41.6 0-75.2-33.6-75.2-75.2S182.5 180.8 224.1 180.8 299.3 214.4 299.3 256s-33.6 75.2-75.2 75.2zm146.4-194.3c0 14.9-12.1 27-27 27s-27-12.1-27-27 12.1-27 27-27 27 12.1 27 27zm76.1 27.2c-1.7-35.3-9.9-66.7-36.2-92.9S384.4 0 349.1 1.7C312.8 0 287.6 0 224 0S135.2 0 98.9 1.7C63.6 0 32.2 8.2 6 34.5S0 97.6 1.7 132.9C0 169.2 0 194.4 0 258s0 88.8 1.7 125.1c1.7 35.3 9.9 66.7 36.2 92.9s57.6 34.5 92.9 36.2c36.3 1.7 61.5 1.7 125.1 1.7s88.8 0 125.1-1.7c35.3-1.7 66.7-9.9 92.9-36.2s34.5-57.6 36.2-92.9c1.7-36.3 1.7-61.5 1.7-125.1s0-88.8-1.7-125.1zM398.8 388c-7.8 19.5-22.9 34.6-42.4 42.4-29.4 11.7-99.2 9-132.4 9s-103 .6-132.4-9c-19.5-7.8-34.6-22.9-42.4-42.4-11.7-29.4-9-99.2-9-132.4s-.6-103 9-132.4c7.8-19.5 22.9-34.6 42.4-42.4 29.4-11.7 99.2-9 132.4-9s103-.6 132.4 9c19.5 7.8 34.6 22.9 42.4 42.4 11.7 29.4 9 99.2 9 132.4s.6 103-9 132.4z"></path>
+      </svg>
+      <span style="color: #E1306C;">Instagram</span>
+    </a>
+  </div>
+      
+  </section>
+
+  <footer class="p-4 text-center text-sm text-gray-500">
+    © 2025 Szabolcsi Dávid. Minden jog fenntartva.
+  </footer>
+<!-- AOS JS -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    easing: 'ease-out',
+    once: false 
+  });
+</script>
+<script>
+  AOS.init();
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/js/lightbox.min.js"></script>
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img" src="" alt="Nagyított kép">
+</div>
+<script>
+function openLightbox(src) {
+  const lightbox = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  img.src = src;
+  lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').style.display = 'none';
+}
+</script>
+</body>
+</html>
